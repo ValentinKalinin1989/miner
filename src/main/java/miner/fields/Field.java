@@ -1,4 +1,4 @@
-package miner;
+package miner.fields;
 
 class Field {
     private Cell[][] matrix;

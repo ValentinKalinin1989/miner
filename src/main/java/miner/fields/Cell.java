@@ -1,4 +1,8 @@
-package miner;
+package miner.fields;
+
+/**
+ * описание ячейки игрового поля
+ */
 
 public enum Cell {
     ZERO,
@@ -20,7 +24,7 @@ public enum Cell {
     public Cell nextNumberBox(){
         return Cell.values()[this.ordinal() + 1];
     }
-    int getNumber() {
+    public int getNumber() {
        return this.ordinal();
     }
 

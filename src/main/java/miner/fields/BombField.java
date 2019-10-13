@@ -1,24 +1,42 @@
-package miner;
-
-class BombField {
+package miner.fields;
+/**
+ * Внутреннее поле для хранения мин
+ * 1) Расставляет мины и хранит их
+ * 2) Устанавливает в ячейку число мин в смежных ячейках
+ * 3) Хранит число сработавших мин
+ */
+public class BombField {
     private Field bombMap;
     private int totalBombs;
+    private int totalBombed;
 
-    BombField(int totalBombs) {
+    public BombField(int totalBombs) {
         this.totalBombs = totalBombs;
         fixBombsCount();
     }
 
-    //размещение элементов (bomb)
-    void start() {
-        bombMap = new Field(Cell.ZERO); //заполнение поля пустыми ячейками
+    public void start() {
+        bombMap = new Field(Cell.ZERO);
+        this.totalBombed = 0;
         for (int i = 0; i < totalBombs; i++) {
-            placeBomb(); //размещение бомб
+            placeBomb();
         }
     }
 
-    Cell getBox(Coord coord) {
+    public Cell getBox(Coord coord) {
         return bombMap.get(coord);
+    }
+
+    public void incrementTotalBombed() {
+        this.totalBombed++;
+    }
+
+    public int getTotalBombed() {
+        return this.totalBombed;
+    }
+
+    public int getTotalBombs() {
+        return this.totalBombs;
     }
 
     private void placeBomb() {
@@ -42,9 +60,5 @@ class BombField {
         int maxBomb = Ranges.getSize().getX() * Ranges.getSize().getY() / 2;
         if (totalBombs > maxBomb)
             totalBombs = maxBomb;
-    }
-
-    int getTotalBombs() {
-        return this.totalBombs;
     }
 }

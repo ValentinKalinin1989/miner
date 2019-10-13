@@ -1,4 +1,4 @@
-package miner;
+package miner.fields;
 
 public class Coord {
     private int x;

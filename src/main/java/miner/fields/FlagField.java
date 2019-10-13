@@ -1,15 +1,15 @@
-package miner;
+package miner.fields;
 
-class FlagField {
+public class FlagField {
     private Field flagMap;
     private int countOfClosedBoxes;
 
-    void start() {
+    public void start() {
         flagMap = new Field(Cell.CLOSED);
         countOfClosedBoxes = Ranges.getSize().getX() * Ranges.getSize().getY();
     }
 
-    Cell getBox (Coord coord) {
+    public Cell getBox (Coord coord) {
         return flagMap.get(coord);
     }
 
@@ -40,21 +40,21 @@ class FlagField {
         return countOfClosedBoxes;
     }
 
-    void stBombedToBox(Coord coord) {
+    public void stBombedToBox(Coord coord) {
         flagMap.set(coord, Cell.BOMBED);
     }
 
-    void setOpenedToClosedBombBox(Coord coord) {
+    public void setOpenedToClosedBombBox(Coord coord) {
         if (flagMap.get(coord) == Cell.CLOSED)
             flagMap.set(coord, Cell.OPENED);
     }
 
-    void setNoBombToFlagedSafeBox(Coord coord) {
+    public void setNoBombToFlagedSafeBox(Coord coord) {
         if (flagMap.get(coord) == Cell.FLAGED)
             flagMap.set(coord, Cell.NOBOMB);
     }
 
-    int getCountOfFlagedBoxesAround(Coord coord) {
+    public int getCountOfFlagedBoxesAround(Coord coord) {
         int count = 0;
         for (Coord around: Ranges.getCoordAround(coord))
             if(flagMap.get(around) == Cell.FLAGED)

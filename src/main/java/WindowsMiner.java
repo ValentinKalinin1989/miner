@@ -2,11 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-import miner.Cell;
-import miner.Coord;
-import miner.Game;
-import miner.Ranges;
+import miner.conditions.*;
+import miner.fields.Cell;
+import miner.fields.Coord;
+import miner.fields.Ranges;
+import miner.logic.Game;
 
 public class WindowsMiner extends JFrame {
     private Game game;
@@ -20,7 +23,11 @@ public class WindowsMiner extends JFrame {
     }
 
     private WindowsMiner() {
-        game = new Game(9, 9,10);
+        List<ConditionWin> listWin = new ArrayList<>();
+        listWin.add(new OpenAllCellToWin());
+        List<ConditionLose> listLose = new ArrayList<>();
+        listLose.add(new OpenThreeBombToLose());
+        game = new Game(9, 9, 10, listWin, listLose);
         game.start();
         setImages();
         initLabel();
@@ -57,7 +64,6 @@ public class WindowsMiner extends JFrame {
                 panel.repaint();
             }
         });
-        //РАЗМЕР ПОЛЯ
         panel.setPreferredSize(new Dimension(Ranges.getSize().getX() * IMAGE_SIZE,
                 Ranges.getSize().getY() * IMAGE_SIZE));
         add(panel);

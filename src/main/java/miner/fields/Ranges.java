@@ -1,4 +1,4 @@
-package miner;
+package miner.fields;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,9 +8,9 @@ public class Ranges {
     private static ArrayList<Coord> allCoords;
     private static Random random = new Random();
 
-    protected static void setSize(Coord _size) {
+    public static void setSize(Coord _size) {
         size = _size;
-        allCoords = new ArrayList<Coord>();
+        allCoords = new ArrayList<>();
         for (int y = 0; y < size.getY(); y++)
             for (int x = 0; x < size.getX(); x++)
                 allCoords.add(new Coord(x, y));
@@ -35,9 +35,9 @@ public class Ranges {
                          random.nextInt(size.getY()));
     }
 
-    static ArrayList<Coord> getCoordAround(Coord coord) {
+    public static ArrayList<Coord> getCoordAround(Coord coord) {
         Coord around;
-        ArrayList<Coord> listOfCoords = new ArrayList<Coord>();
+        ArrayList<Coord> listOfCoords = new ArrayList<>();
         for (int x = coord.getX() - 1; x <=coord.getX() + 1; x++)
             for (int y = coord.getY() - 1; y <=coord.getY() + 1; y++)
                 if(inRange(around = new Coord(x, y)))

@@ -1,8 +1,18 @@
-import miner.*;
+import miner.conditions.ConditionLose;
+import miner.conditions.ConditionWin;
+import miner.conditions.OpenAllCellToWin;
+import miner.conditions.OpenOneBombToLose;
+import miner.fields.Cell;
+import miner.fields.Coord;
+import miner.fields.Ranges;
+import miner.logic.Game;
+import miner.logic.GameState;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConsoleMiner {
 
@@ -15,7 +25,11 @@ public class ConsoleMiner {
 
     private ConsoleMiner() {
         setImages();
-        game = new Game(9, 9, 10);
+        List<ConditionWin> listWin = new ArrayList<>();
+        listWin.add(new OpenAllCellToWin());
+        List<ConditionLose> listLose = new ArrayList<>();
+        listLose.add(new OpenOneBombToLose());
+        game = new Game(9, 9, 10, listWin, listLose);
         game.start();
         setImages();
         printGameInfo();
@@ -24,10 +38,12 @@ public class ConsoleMiner {
         do {
             printGameField();
             System.out.println();
-            try {
-                inputUser = reader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
+            while (inputUser == null) {
+                try {
+                    inputUser = reader.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } while (!sendUserInputToGame(inputUser) || game.getState() == GameState.PLAYED);
         printGameField();
@@ -61,12 +77,12 @@ public class ConsoleMiner {
         System.out.print("[ ]|");
         for (int i = 0; i < Ranges.getSize().getX(); i++)
         {
-            System.out.printf("|" + i + "|");
+            System.out.print("|" + i + "|");
         }
         System.out.print(LN + "---");
         for (int i = 0; i < Ranges.getSize().getX(); i++)
         {
-            System.out.printf("---");
+            System.out.print("---");
         }
         for (Coord coord: Ranges.getAllCoords())
         {
