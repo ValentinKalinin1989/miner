@@ -26,7 +26,7 @@ public class WindowsMiner extends JFrame {
         List<ConditionWin> listWin = new ArrayList<>();
         listWin.add(new OpenAllCellToWin());
         List<ConditionLose> listLose = new ArrayList<>();
-        listLose.add(new OpenThreeBombToLose());
+        listLose.add(new OpenOneBombToLose());
         game = new Game(9, 9, 10, listWin, listLose);
         game.start();
         setImages();

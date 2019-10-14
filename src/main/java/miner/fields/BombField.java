@@ -42,8 +42,9 @@ public class BombField {
     private void placeBomb() {
         while (true) {
             Coord coord = Ranges.getRandomCoord();
-            if(Cell.BOMB == bombMap.get(coord))
+            if(Cell.BOMB == bombMap.get(coord)) {
                 continue;
+            }
             bombMap.set(coord, Cell.BOMB);
             incNumbersAroundBomb(coord);
             break;
@@ -52,13 +53,19 @@ public class BombField {
 
     private void incNumbersAroundBomb(Coord coord) {
         for (Coord around: Ranges.getCoordAround(coord))
-            if(Cell.BOMB != bombMap.get(around))
+            if(Cell.BOMB != bombMap.get(around)) {
                 bombMap.set(around, bombMap.get(around).nextNumberBox());
+            }
     }
 
     private void fixBombsCount() {
         int maxBomb = Ranges.getSize().getX() * Ranges.getSize().getY() / 2;
-        if (totalBombs > maxBomb)
+        if (totalBombs > maxBomb) {
             totalBombs = maxBomb;
+        }
+    }
+
+    public Field getBombMap() {
+        return bombMap;
     }
 }

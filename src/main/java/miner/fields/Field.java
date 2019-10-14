@@ -1,5 +1,9 @@
 package miner.fields;
 
+/**
+ * является основой игрового поля
+ * хранит массив ячеек поля
+ */
 class Field {
     private Cell[][] matrix;
 

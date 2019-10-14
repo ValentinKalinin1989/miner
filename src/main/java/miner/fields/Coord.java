@@ -1,5 +1,8 @@
 package miner.fields;
 
+/**
+ * класс для хранения координат
+ */
 public class Coord {
     private int x;
     private int y;

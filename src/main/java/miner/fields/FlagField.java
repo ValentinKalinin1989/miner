@@ -1,7 +1,17 @@
 package miner.fields;
 
+/**
+ * хранит внешнее игровое поле
+ * состоит из ячеек типа OPENED, CLOSED, FLAGED
+ */
 public class FlagField {
+    /**
+     * игровое поле
+     */
     private Field flagMap;
+    /**
+     * число закрытых ячеек(CLOSED)
+     */
     private int countOfClosedBoxes;
 
     public void start() {
@@ -45,21 +55,24 @@ public class FlagField {
     }
 
     public void setOpenedToClosedBombBox(Coord coord) {
-        if (flagMap.get(coord) == Cell.CLOSED)
+        if (flagMap.get(coord) == Cell.CLOSED) {
             flagMap.set(coord, Cell.OPENED);
+        }
     }
 
     public void setNoBombToFlagedSafeBox(Coord coord) {
-        if (flagMap.get(coord) == Cell.FLAGED)
+        if (flagMap.get(coord) == Cell.FLAGED) {
             flagMap.set(coord, Cell.NOBOMB);
+        }
     }
 
     public int getCountOfFlagedBoxesAround(Coord coord) {
         int count = 0;
-        for (Coord around: Ranges.getCoordAround(coord))
-            if(flagMap.get(around) == Cell.FLAGED)
+        for (Coord around: Ranges.getCoordAround(coord)) {
+            if (flagMap.get(around) == Cell.FLAGED) {
                 count++;
-
+            }
+        }
         return count;
     }
 }
