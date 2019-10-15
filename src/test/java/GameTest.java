@@ -41,7 +41,7 @@ public class GameTest {
         Game game = new Game(9, 9, 10, listWin, listLose);
         game.start();
         GameState stateLose = takeStateAferLose(game, 9, 9, 3);
-        assertThat(stateLose, is(GameState.BOMBED));
+        assertThat(stateLose, is(GameState.LOSING));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class GameTest {
         Game game = new Game(8, 8, 10, listWin, listLose);
         game.start();
         GameState stateLose = takeStateAferLose(game, 8, 8, 1);
-        assertThat(stateLose, is(GameState.BOMBED));
+        assertThat(stateLose, is(GameState.LOSING));
     }
 
     private GameState takeStateAferLose(Game game, int cols, int rows, int countBombToLose) {

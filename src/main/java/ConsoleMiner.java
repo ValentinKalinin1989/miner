@@ -47,7 +47,7 @@ public class ConsoleMiner {
             }
         } while (!sendUserInputToGame(inputUser) || game.getState() == GameState.PLAYED);
         printGameField();
-        if(game.getState() == GameState.BOMBED) {
+        if(game.getState() == GameState.LOSING) {
             System.out.println(LN + "Вы проиграли");
         }
         if (game.getState() == GameState.PLAYED) {

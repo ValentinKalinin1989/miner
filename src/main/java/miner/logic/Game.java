@@ -50,7 +50,7 @@ public class Game {
         if(state == GameState.PLAYED) {
             for (ConditionLose condLose : condLoseList) {
                 if (condLose.isLose(this)) {
-                    state = GameState.BOMBED;
+                    state = GameState.LOSING;
                     for (Coord coord : Ranges.getAllCoords()) {
                         if (bombField.getBox(coord) == Cell.BOMB) {
                             flagField.setOpenedToClosedBombBox(coord);

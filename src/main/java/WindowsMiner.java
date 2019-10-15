@@ -10,6 +10,7 @@ import miner.fields.Cell;
 import miner.fields.Coord;
 import miner.fields.Ranges;
 import miner.logic.Game;
+import miner.logic.GameState;
 
 public class WindowsMiner extends JFrame {
     private Game game;
@@ -62,6 +63,13 @@ public class WindowsMiner extends JFrame {
                     game.start();
                 label.setText(getMessage());
                 panel.repaint();
+
+                if(game.getState() != GameState.PLAYED) {
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            getMessage(),
+                            "Результат игры",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
             }
         });
         panel.setPreferredSize(new Dimension(Ranges.getSize().getX() * IMAGE_SIZE,
@@ -71,10 +79,10 @@ public class WindowsMiner extends JFrame {
 
     private String getMessage() {
         switch (game.getState()) {
-            case PLAYED: return "Just do it!";
-            case BOMBED: return "Terrorist win!";
-            case WINNER: return "Win!";
-            default: return "Welcome to the Game!";
+            case PLAYED: return "JUST DO IT";
+            case LOSING: return "LOSING";
+            case WINNER: return "WIN!";
+            default: return "WELCOM TO THE GAME!!!";
         }
     }
 
@@ -104,5 +112,4 @@ public class WindowsMiner extends JFrame {
         label = new JLabel("Welcome to the Game!", SwingConstants.CENTER);
         add(label, BorderLayout.NORTH);
     }
-
 }
